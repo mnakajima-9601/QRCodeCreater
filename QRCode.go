@@ -115,7 +115,7 @@ func createCode() {
 			continue
 		}
 		qrCode, _ := qr.Encode(code, qr.M, qr.Auto)
-		qrCode, _ = barcode.Scale(qrCode, 164, 164)
+		qrCode, _ = barcode.Scale(qrCode, conf.Size, conf.Size)
 		file, _ := os.Create(conf.Out + "test.png")
 		defer file.Close()
 		png.Encode(file, qrCode)
