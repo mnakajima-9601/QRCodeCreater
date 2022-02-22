@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <List>
-	<Out>/home/ueserver/Dropbox/_source/go/QRCode/QRCode/</Out>
-	<ListFile>/home/ueserver/Dropbox/_source/go/QRCode/list.txt</ListFile>
-	<Size>50</Size>
+	<Out>/Users/m.nakajima/Desktop/work/crz/＠作業/20220220_test/</Out>
+	<ListFile>/Users/m.nakajima/Desktop/work/crz/QRCodeCreater/list.txt</ListFile>
+	<CsvFile>/Users/m.nakajima/Desktop/work/crz/＠作業/20220220_test/CSV/test2.csv</CsvFile>
+	<Size>164</Size>
+	<TtfFile>/Users/m.nakajima/Desktop/work/crz/＠作業/20220220_test/font/VL-PGothic-Regular.ttf</TtfFile>
 </List>
