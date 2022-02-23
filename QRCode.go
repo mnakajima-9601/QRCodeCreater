@@ -194,7 +194,7 @@ func createImg() {
 			Dot:  fixed.Point26_6{},
 		}
 
-		dr1.Dot.X = fixed.I(50)
+		dr1.Dot.X = (fixed.I(imageWidth) - dr1.MeasureString(title1List[count])) / 2
 		dr1.Dot.Y = fixed.I(90)
 		dr1.DrawString(title1List[count])
 
@@ -206,7 +206,7 @@ func createImg() {
 			Dot:  fixed.Point26_6{},
 		}
 
-		dr2.Dot.X = fixed.I(78)
+		dr2.Dot.X = (fixed.I(imageWidth) - dr2.MeasureString(title2List[count])) / 2
 		dr2.Dot.Y = fixed.I(110)
 		dr2.DrawString(title2List[count])
 
@@ -218,7 +218,7 @@ func createImg() {
 			Dot:  fixed.Point26_6{},
 		}
 
-		dr3.Dot.X = fixed.I(78)
+		dr3.Dot.X = (fixed.I(imageWidth) - dr3.MeasureString(title3List[count])) / 2
 		dr3.Dot.Y = fixed.I(130)
 		dr3.DrawString(title3List[count])
 
@@ -230,7 +230,7 @@ func createImg() {
 			Dot:  fixed.Point26_6{},
 		}
 
-		dr4.Dot.X = fixed.I(125)
+		dr4.Dot.X = (fixed.I(imageWidth) - dr4.MeasureString(no)) / 2
 		dr4.Dot.Y = fixed.I(350)
 		dr4.DrawString(no)
 
@@ -242,7 +242,7 @@ func createImg() {
 			Dot:  fixed.Point26_6{},
 		}
 
-		dr5.Dot.X = fixed.I(130)
+		dr5.Dot.X = (fixed.I(imageWidth) - dr5.MeasureString(information1List[count])) / 2
 		dr5.Dot.Y = fixed.I(370)
 		dr5.DrawString(information1List[count])
 
@@ -254,7 +254,7 @@ func createImg() {
 			Dot:  fixed.Point26_6{},
 		}
 
-		dr6.Dot.X = fixed.I(130)
+		dr6.Dot.X = (fixed.I(imageWidth) - dr6.MeasureString(information2List[count])) / 2
 		dr6.Dot.Y = fixed.I(390)
 		dr6.DrawString(information2List[count])
 
@@ -266,7 +266,7 @@ func createImg() {
 			Dot:  fixed.Point26_6{},
 		}
 
-		dr7.Dot.X = fixed.I(115)
+		dr7.Dot.X = (fixed.I(imageWidth) - dr7.MeasureString(information3List[count])) / 2
 		dr7.Dot.Y = fixed.I(410)
 		dr7.DrawString(information3List[count])
 
