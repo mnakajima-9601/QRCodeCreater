@@ -18,8 +18,6 @@ import (
 	"github.com/golang/freetype/truetype"
 	"golang.org/x/image/font"
 	"golang.org/x/image/math/fixed"
-
-	_ "image/png"
 )
 
 type Conf struct {
