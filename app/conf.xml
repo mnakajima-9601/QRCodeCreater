@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <List>
-	<Out>/work/crz/＠作業/20220220_test/</Out>
-	<CsvFile>/work/crz/＠作業/20220220_test/CSV/test2.csv</CsvFile>
+	<Out>/test/</Out>
+	<CsvFile>/test/csv/test.csv</CsvFile>
 	<Size>164</Size>
 	<TtfFile>VL-PGothic-Regular.ttf</TtfFile>
 </List>
