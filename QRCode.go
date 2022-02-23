@@ -48,13 +48,13 @@ var qrY int
 const (
 	x             = 0
 	y             = 0
-	fontSize      = 30  // point
-	fontSize2     = 40  // point
-	imageWidth    = 600 // pixel
-	imageHeight   = 800 // pixel
+	fontSize      = 15  // point
+	fontSize2     = 20  // point
+	imageWidth    = 320 // pixel
+	imageHeight   = 516 // pixel
 	textTopMargin = 80  // fixed.I
-	qrDefaultX    = 180
-	qrDefaultY    = 253
+	qrDefaultX    = 78
+	qrDefaultY    = 160
 )
 
 func main() {
@@ -188,18 +188,6 @@ func createImg() {
 
 		// --------------文字入力開始-------------------
 
-		// 整理番号
-		dr := &font.Drawer{
-			Dst:  img,
-			Src:  image.Black,
-			Face: face2,
-			Dot:  fixed.Point26_6{},
-		}
-
-		dr.Dot.X = fixed.I(230)
-		dr.Dot.Y = fixed.I(600)
-		dr.DrawString(no)
-
 		// タイトル１
 		dr1 := &font.Drawer{
 			Dst:  img,
@@ -208,8 +196,8 @@ func createImg() {
 			Dot:  fixed.Point26_6{},
 		}
 
-		dr1.Dot.X = fixed.I(70)
-		dr1.Dot.Y = fixed.I(100)
+		dr1.Dot.X = fixed.I(50)
+		dr1.Dot.Y = fixed.I(90)
 		dr1.DrawString(title1List[count])
 
 		// タイトル２
@@ -220,8 +208,8 @@ func createImg() {
 			Dot:  fixed.Point26_6{},
 		}
 
-		dr2.Dot.X = fixed.I(150)
-		dr2.Dot.Y = fixed.I(140)
+		dr2.Dot.X = fixed.I(78)
+		dr2.Dot.Y = fixed.I(110)
 		dr2.DrawString(title2List[count])
 
 		// タイトル３
@@ -232,23 +220,23 @@ func createImg() {
 			Dot:  fixed.Point26_6{},
 		}
 
-		dr3.Dot.X = fixed.I(250)
-		dr3.Dot.Y = fixed.I(180)
+		dr3.Dot.X = fixed.I(78)
+		dr3.Dot.Y = fixed.I(130)
 		dr3.DrawString(title3List[count])
 
-		// 情報１
+		// 整理番号
 		dr4 := &font.Drawer{
 			Dst:  img,
 			Src:  image.Black,
-			Face: face,
+			Face: face2,
 			Dot:  fixed.Point26_6{},
 		}
 
-		dr4.Dot.X = fixed.I(235)
-		dr4.Dot.Y = fixed.I(650)
-		dr4.DrawString(information1List[count])
+		dr4.Dot.X = fixed.I(125)
+		dr4.Dot.Y = fixed.I(350)
+		dr4.DrawString(no)
 
-		// 情報２
+		// 情報１
 		dr5 := &font.Drawer{
 			Dst:  img,
 			Src:  image.Black,
@@ -256,11 +244,11 @@ func createImg() {
 			Dot:  fixed.Point26_6{},
 		}
 
-		dr5.Dot.X = fixed.I(235)
-		dr5.Dot.Y = fixed.I(690)
-		dr5.DrawString(information2List[count])
+		dr5.Dot.X = fixed.I(130)
+		dr5.Dot.Y = fixed.I(370)
+		dr5.DrawString(information1List[count])
 
-		// 情報３
+		// 情報２
 		dr6 := &font.Drawer{
 			Dst:  img,
 			Src:  image.Black,
@@ -268,22 +256,25 @@ func createImg() {
 			Dot:  fixed.Point26_6{},
 		}
 
-		dr6.Dot.X = fixed.I(210)
-		dr6.Dot.Y = fixed.I(730)
-		dr6.DrawString(information3List[count])
+		dr6.Dot.X = fixed.I(130)
+		dr6.Dot.Y = fixed.I(390)
+		dr6.DrawString(information2List[count])
+
+		// 情報３
+		dr7 := &font.Drawer{
+			Dst:  img,
+			Src:  image.Black,
+			Face: face,
+			Dot:  fixed.Point26_6{},
+		}
+
+		dr7.Dot.X = fixed.I(115)
+		dr7.Dot.Y = fixed.I(410)
+		dr7.DrawString(information3List[count])
 
 		// QRコード
-		// dr7 := &font.Drawer{
-		// 	Dst:  img,
-		// 	Src:  image.Black,
-		// 	Face: face,
-		// 	Dot:  fixed.Point26_6{},
-		// }
 
-		// dr7.Dot.X = fixed.I(210)
-		// dr7.Dot.Y = fixed.I(430)
-
-		margin = 4
+		margin = 0
 		qrCode, _ := qr.Encode(codeList[count], qr.M, qr.Auto)
 		qrCode, _ = barcode.Scale(qrCode, conf.Size, conf.Size)
 
