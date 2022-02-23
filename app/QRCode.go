@@ -171,7 +171,13 @@ func createImg() {
 		}
 
 		dr1.Dot.X = (fixed.I(imageWidth) - dr1.MeasureString(title1List[count])) / 2
-		dr1.Dot.Y = fixed.I(90)
+		if title3List[count] == "" || title2List[count] == "" {
+			dr1.Dot.Y = fixed.I(110)
+		} else if title3List[count] == "" && title2List[count] == "" {
+			dr1.Dot.Y = fixed.I(130)
+		} else {
+			dr1.Dot.Y = fixed.I(90)
+		}
 		dr1.DrawString(title1List[count])
 
 		// タイトル２
@@ -183,7 +189,11 @@ func createImg() {
 		}
 
 		dr2.Dot.X = (fixed.I(imageWidth) - dr2.MeasureString(title2List[count])) / 2
-		dr2.Dot.Y = fixed.I(110)
+		if title3List[count] == "" {
+			dr2.Dot.Y = fixed.I(130)
+		} else {
+			dr2.Dot.Y = fixed.I(110)
+		}
 		dr2.DrawString(title2List[count])
 
 		// タイトル３
@@ -231,7 +241,11 @@ func createImg() {
 		}
 
 		dr6.Dot.X = (fixed.I(imageWidth) - dr6.MeasureString(information2List[count])) / 2
-		dr6.Dot.Y = fixed.I(390)
+		if information1List[count] == "" {
+			dr6.Dot.Y = fixed.I(370)
+		} else {
+			dr6.Dot.Y = fixed.I(390)
+		}
 		dr6.DrawString(information2List[count])
 
 		// 情報３
@@ -243,7 +257,13 @@ func createImg() {
 		}
 
 		dr7.Dot.X = (fixed.I(imageWidth) - dr7.MeasureString(information3List[count])) / 2
-		dr7.Dot.Y = fixed.I(410)
+		if information1List[count] == "" && information2List[count] == "" {
+			dr7.Dot.Y = fixed.I(370)
+		} else if information1List[count] == "" || information2List[count] == "" {
+			dr7.Dot.Y = fixed.I(390)
+		} else {
+			dr7.Dot.Y = fixed.I(410)
+		}
 		dr7.DrawString(information3List[count])
 
 		// QRコード
