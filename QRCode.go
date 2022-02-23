@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"bytes"
 	"encoding/csv"
 	"encoding/xml"
@@ -12,13 +11,6 @@ import (
 	"io/ioutil"
 	"os"
 	"runtime"
-
-	// "log"
-	// "os"
-	// "runtime"
-	// "time"
-
-	// "gocv.io/x/gocv"
 
 	"github.com/boombuler/barcode"
 	"github.com/boombuler/barcode/qr"
@@ -58,14 +50,6 @@ const (
 )
 
 func main() {
-
-	//パラメーターをxmlファイルから取得する
-	// getConf()
-	//QRコードにする文字のリストを読み込む
-	// getList()
-	//QRコード生成 boombuler/barcodeパッケージ使用
-	// createCode()
-
 	//パラメーターをxmlファイルから取得する
 	getConf()
 	//CSVを読み込む
@@ -74,7 +58,6 @@ func main() {
 	createCode()
 	// 画像作成
 	createImg()
-
 }
 
 func getConf() {
@@ -93,22 +76,6 @@ func getConf() {
 	}
 }
 
-func getList() {
-	fp, err := os.Open(conf.ListFile)
-	if err != nil {
-		panic(err)
-	}
-	defer fp.Close()
-
-	scanner := bufio.NewScanner(fp)
-	for scanner.Scan() {
-		codeList = append(codeList, scanner.Text())
-	}
-	if err := scanner.Err(); err != nil {
-		panic(err)
-	}
-}
-
 func createCode() {
 	for _, code := range codeList {
 		if code == "" {
@@ -116,7 +83,7 @@ func createCode() {
 		}
 		qrCode, _ := qr.Encode(code, qr.M, qr.Auto)
 		qrCode, _ = barcode.Scale(qrCode, conf.Size, conf.Size)
-		file, _ := os.Create(conf.Out + "test.png")
+		file, _ := os.Create(conf.Out + "test_" + code + ".png")
 		defer file.Close()
 		png.Encode(file, qrCode)
 	}
@@ -137,7 +104,7 @@ func getCsv() {
 		if err != nil {
 			break
 		}
-		codeList = append(noList, line[0])
+		codeList = append(codeList, line[0])
 		noList = append(noList, line[1])
 		title1List = append(title1List, line[2])
 		title2List = append(title2List, line[3])
@@ -145,6 +112,7 @@ func getCsv() {
 		information1List = append(information1List, line[5])
 		information2List = append(information2List, line[6])
 		information3List = append(information3List, line[7])
+		fmt.Println(line)
 	}
 
 }
