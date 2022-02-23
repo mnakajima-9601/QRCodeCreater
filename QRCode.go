@@ -18,6 +18,8 @@ import (
 	"github.com/golang/freetype/truetype"
 	"golang.org/x/image/font"
 	"golang.org/x/image/math/fixed"
+
+	_ "image/png"
 )
 
 type Conf struct {
@@ -39,6 +41,9 @@ var title3List []string
 var information1List []string
 var information2List []string
 var information3List []string
+var margin int
+var qrX int
+var qrY int
 
 const (
 	x             = 0
@@ -48,9 +53,12 @@ const (
 	imageWidth    = 600 // pixel
 	imageHeight   = 800 // pixel
 	textTopMargin = 80  // fixed.I
+	qrDefaultX    = 180
+	qrDefaultY    = 253
 )
 
 func main() {
+	// ユーザディレクトリ取得
 	p, _ := os.UserHomeDir()
 	dir = p + "/Desktop/"
 	//パラメーターをxmlファイルから取得する
@@ -58,14 +66,13 @@ func main() {
 	//CSVを読み込む
 	getCsv()
 	//QRコード生成 boombuler/barcodeパッケージ使用
-	createCode()
+	// createCode()
 	// 画像作成
 	createImg()
 }
 
 func getConf() {
 	p, _ := os.Getwd()
-	fmt.Println(p)
 	confname := ""
 	if runtime.GOOS == "windows" {
 		confname = p + "\\conf.xml"
@@ -81,18 +88,18 @@ func getConf() {
 	conf.Out = dir + conf.Out
 }
 
-func createCode() {
-	for _, code := range codeList {
-		if code == "" {
-			continue
-		}
-		qrCode, _ := qr.Encode(code, qr.M, qr.Auto)
-		qrCode, _ = barcode.Scale(qrCode, conf.Size, conf.Size)
-		file, _ := os.Create(conf.Out + "test_" + code + ".png")
-		defer file.Close()
-		png.Encode(file, qrCode)
-	}
-}
+// func createCode() {
+// 	for _, code := range codeList {
+// 		if code == "" {
+// 			continue
+// 		}
+// 		qrCode, _ := qr.Encode(code, qr.M, qr.Auto)
+// 		qrCode, _ = barcode.Scale(qrCode, conf.Size, conf.Size)
+// 		file, _ := os.Create(conf.Out + "test_" + code + ".png")
+// 		defer file.Close()
+// 		png.Encode(file, qrCode)
+// 	}
+// }
 
 func getCsv() {
 	file, err := os.Open(conf.CsvFile)
@@ -117,7 +124,6 @@ func getCsv() {
 		information1List = append(information1List, line[5])
 		information2List = append(information2List, line[6])
 		information3List = append(information3List, line[7])
-		fmt.Println(line)
 	}
 
 }
@@ -168,9 +174,9 @@ func createImg() {
 		face2 := truetype.NewFace(ft, &opt2)
 
 		// b, a := font.BoundString(face, text)
-		b, a := font.BoundString(face, no)
-		w := b.Max.X - b.Min.X + fixed.I(1)
-		h := b.Max.Y - b.Min.Y + fixed.I(1)
+		// b, a := font.BoundString(face, no)
+		// w := b.Max.X - b.Min.X + fixed.I(1)
+		// h := b.Max.Y - b.Min.Y + fixed.I(1)
 
 		img := image.NewRGBA(image.Rect(x, y, imageWidth, imageHeight))
 		// 短形に色を追加
@@ -202,7 +208,7 @@ func createImg() {
 			Dot:  fixed.Point26_6{},
 		}
 
-		dr1.Dot.X = fixed.I(60)
+		dr1.Dot.X = fixed.I(70)
 		dr1.Dot.Y = fixed.I(100)
 		dr1.DrawString(title1List[count])
 
@@ -267,20 +273,39 @@ func createImg() {
 		dr6.DrawString(information3List[count])
 
 		// QRコード
-		dr7 := &font.Drawer{
-			Dst:  img,
-			Src:  image.Black,
-			Face: face,
-			Dot:  fixed.Point26_6{},
-		}
+		// dr7 := &font.Drawer{
+		// 	Dst:  img,
+		// 	Src:  image.Black,
+		// 	Face: face,
+		// 	Dot:  fixed.Point26_6{},
+		// }
 
-		dr7.Dot.X = (w - a) / 2
-		dr7.Dot.Y = h - b.Max.Y
+		// dr7.Dot.X = fixed.I(210)
+		// dr7.Dot.Y = fixed.I(430)
 
+		margin = 4
 		qrCode, _ := qr.Encode(codeList[count], qr.M, qr.Auto)
 		qrCode, _ = barcode.Scale(qrCode, conf.Size, conf.Size)
 
-		// dr7.DrawString(qrCode)
+		rect := qrCode.Bounds()
+		qrX = qrDefaultX
+		qrY = qrDefaultY
+		for y := rect.Min.Y - margin; y < rect.Max.Y+margin; y++ {
+			qrY = qrY + 1
+			qrX = qrDefaultX
+			for x := rect.Min.X - margin; x < rect.Max.X+margin; x++ {
+				if rect.Min.X <= x && x < rect.Max.X &&
+					rect.Min.Y <= y && y < rect.Max.Y &&
+					qrCode.At(x, y) == color.Black {
+					img.Set(qrX, qrY, color.RGBA{0, 0, 0, 0})
+				} else {
+					img.Set(qrX, qrY, color.RGBA{255, 255, 255, 255})
+				}
+				qrX = qrX + 1
+			}
+		}
+		qrX = qrDefaultX
+		qrY = qrDefaultY
 
 		// --------------文字入力終了-------------------
 
