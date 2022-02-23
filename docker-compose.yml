@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  golang:
+    image: golang:1.17.6
+    tty: true
+    volumes:
+      - ./:/go
+    environment:
+      - "GOPATH=/go"

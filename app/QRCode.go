@@ -50,7 +50,7 @@ const (
 	imageWidth    = 320 // pixel
 	imageHeight   = 516 // pixel
 	textTopMargin = 80  // fixed.I
-	qrDefaultX    = 78
+	qrDefaultX    = 61
 	qrDefaultY    = 160
 )
 
@@ -172,11 +172,11 @@ func createImg() {
 
 		dr1.Dot.X = (fixed.I(imageWidth) - dr1.MeasureString(title1List[count])) / 2
 		if title3List[count] == "" || title2List[count] == "" {
-			dr1.Dot.Y = fixed.I(110)
+			dr1.Dot.Y = fixed.I(100)
 		} else if title3List[count] == "" && title2List[count] == "" {
 			dr1.Dot.Y = fixed.I(130)
 		} else {
-			dr1.Dot.Y = fixed.I(90)
+			dr1.Dot.Y = fixed.I(70)
 		}
 		dr1.DrawString(title1List[count])
 
@@ -192,7 +192,7 @@ func createImg() {
 		if title3List[count] == "" {
 			dr2.Dot.Y = fixed.I(130)
 		} else {
-			dr2.Dot.Y = fixed.I(110)
+			dr2.Dot.Y = fixed.I(100)
 		}
 		dr2.DrawString(title2List[count])
 
@@ -217,7 +217,7 @@ func createImg() {
 		}
 
 		dr4.Dot.X = (fixed.I(imageWidth) - dr4.MeasureString(no)) / 2
-		dr4.Dot.Y = fixed.I(350)
+		dr4.Dot.Y = fixed.I(395)
 		dr4.DrawString(no)
 
 		// 情報１
@@ -229,7 +229,7 @@ func createImg() {
 		}
 
 		dr5.Dot.X = (fixed.I(imageWidth) - dr5.MeasureString(information1List[count])) / 2
-		dr5.Dot.Y = fixed.I(370)
+		dr5.Dot.Y = fixed.I(420)
 		dr5.DrawString(information1List[count])
 
 		// 情報２
@@ -242,9 +242,9 @@ func createImg() {
 
 		dr6.Dot.X = (fixed.I(imageWidth) - dr6.MeasureString(information2List[count])) / 2
 		if information1List[count] == "" {
-			dr6.Dot.Y = fixed.I(370)
+			dr6.Dot.Y = fixed.I(420)
 		} else {
-			dr6.Dot.Y = fixed.I(390)
+			dr6.Dot.Y = fixed.I(445)
 		}
 		dr6.DrawString(information2List[count])
 
@@ -258,11 +258,11 @@ func createImg() {
 
 		dr7.Dot.X = (fixed.I(imageWidth) - dr7.MeasureString(information3List[count])) / 2
 		if information1List[count] == "" && information2List[count] == "" {
-			dr7.Dot.Y = fixed.I(370)
+			dr7.Dot.Y = fixed.I(420)
 		} else if information1List[count] == "" || information2List[count] == "" {
-			dr7.Dot.Y = fixed.I(390)
+			dr7.Dot.Y = fixed.I(445)
 		} else {
-			dr7.Dot.Y = fixed.I(410)
+			dr7.Dot.Y = fixed.I(470)
 		}
 		dr7.DrawString(information3List[count])
 
