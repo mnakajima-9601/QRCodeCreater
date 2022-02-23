@@ -29,6 +29,7 @@ type Conf struct {
 }
 
 var count int
+var dir string
 var conf Conf
 var codeList []string
 var noList []string
@@ -50,6 +51,8 @@ const (
 )
 
 func main() {
+	p, _ := os.UserHomeDir()
+	dir = p + "/Desktop/"
 	//パラメーターをxmlファイルから取得する
 	getConf()
 	//CSVを読み込む
@@ -74,6 +77,8 @@ func getConf() {
 	if err != nil {
 		panic(err)
 	}
+	conf.CsvFile = dir + conf.CsvFile
+	conf.Out = dir + conf.Out
 }
 
 func createCode() {

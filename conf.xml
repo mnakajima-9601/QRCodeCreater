@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <List>
-	<Out>/Users/m.nakajima/Desktop/work/crz/＠作業/20220220_test/</Out>
-	<CsvFile>/Users/m.nakajima/Desktop/work/crz/＠作業/20220220_test/CSV/test2.csv</CsvFile>
+	<Out>/work/crz/＠作業/20220220_test/</Out>
+	<CsvFile>/work/crz/＠作業/20220220_test/CSV/test2.csv</CsvFile>
 	<Size>164</Size>
-	<TtfFile>/Users/m.nakajima/Desktop/work/crz/＠作業/20220220_test/font/VL-PGothic-Regular.ttf</TtfFile>
+	<TtfFile>VL-PGothic-Regular.ttf</TtfFile>
 </List>
