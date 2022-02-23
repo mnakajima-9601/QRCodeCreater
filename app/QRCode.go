@@ -10,7 +10,6 @@ import (
 	"image/png"
 	"io/ioutil"
 	"os"
-	"runtime"
 
 	"github.com/boombuler/barcode"
 	"github.com/boombuler/barcode/qr"
@@ -63,8 +62,6 @@ func main() {
 	getConf()
 	//CSVを読み込む
 	getCsv()
-	//QRコード生成 boombuler/barcodeパッケージ使用
-	// createCode()
 	// 画像作成
 	createImg()
 }
@@ -72,11 +69,7 @@ func main() {
 func getConf() {
 	p, _ := os.Getwd()
 	confname := ""
-	if runtime.GOOS == "windows" {
-		confname = p + "\\conf.xml"
-	} else {
-		confname = p + "/conf.xml"
-	}
+	confname = p + "/conf.xml"
 	data, _ := ioutil.ReadFile(confname)
 	err := xml.Unmarshal(data, &conf)
 	if err != nil {
@@ -84,20 +77,8 @@ func getConf() {
 	}
 	conf.CsvFile = dir + conf.CsvFile
 	conf.Out = dir + conf.Out
+	conf.TtfFile = "font/" + conf.TtfFile
 }
-
-// func createCode() {
-// 	for _, code := range codeList {
-// 		if code == "" {
-// 			continue
-// 		}
-// 		qrCode, _ := qr.Encode(code, qr.M, qr.Auto)
-// 		qrCode, _ = barcode.Scale(qrCode, conf.Size, conf.Size)
-// 		file, _ := os.Create(conf.Out + "test_" + code + ".png")
-// 		defer file.Close()
-// 		png.Encode(file, qrCode)
-// 	}
-// }
 
 func getCsv() {
 	file, err := os.Open(conf.CsvFile)
@@ -170,11 +151,6 @@ func createImg() {
 
 		face := truetype.NewFace(ft, &opt)
 		face2 := truetype.NewFace(ft, &opt2)
-
-		// b, a := font.BoundString(face, text)
-		// b, a := font.BoundString(face, no)
-		// w := b.Max.X - b.Min.X + fixed.I(1)
-		// h := b.Max.Y - b.Min.Y + fixed.I(1)
 
 		img := image.NewRGBA(image.Rect(x, y, imageWidth, imageHeight))
 		// 短形に色を追加
