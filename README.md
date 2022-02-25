@@ -19,7 +19,7 @@ conf.xml内でパラメータ設定できます。
 |ListFile|バーコードにしたい文字列、入力文字列が保存されたCSVファイル名|
 |Size|QRコードのサイズ|
 |TtfFile|フォントファイル(実行ファイル化に配置)|
-```
+
 直接引数に指定できます。
 ```
 go run main.go 出力先フォルダ CSVファイルパス
@@ -29,6 +29,7 @@ go run main.go 出力先フォルダ CSVファイルパス
 ## dockerでの起動手順
 カレントディレクトリ/csv配下にCSVファイルを置きます
 output配下に画像が出力されます。
+
 ```
 docker-compose build --no-cache
 docker run -it --name コンテナ名 --mount type=bind,src=カレントディレクトリ,dst=コンテナディレクトリ  qrcodecreater_qrcode コンテナディレクトリ/アウトプット先ディレクトリ コンテナディレクトリ/CSVファイル名
