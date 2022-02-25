@@ -1,6 +1,7 @@
 # QRCodeCreator
 QRコードを作成するプログラムです。
 
+## ローカルでの起動手順
 conf.xml内でパラメータ設定できます。
 
 ```
@@ -18,17 +19,17 @@ conf.xml内でパラメータ設定できます。
 |ListFile|バーコードにしたい文字列、入力文字列が保存されたCSVファイル名|
 |Size|QRコードのサイズ|
 |TtfFile|フォントファイル(実行ファイル化に配置)|
-
-出力先はデスクトップ指定になります。
-指定フォルダの場合は、以下の部分はデスクトップのパス以下を入力して下さい。
-|----|
-|Out|
-|CsvFile|
-|----|
-
-
-
- Dockerfile があるディレクトリで コマンドを実行する。
 ```
- docker build -t [イメージ名] 
+直接引数に指定できます。
+```
+go run main.go 出力先フォルダ CSVファイルパス
+```
+
+
+## dockerでの起動手順
+カレントディレクトリ/csv配下にCSVファイルを置きます
+```
+docker-compose build --no-cache
+docker-compose up -d
+docker run -v $PWD:/go/src/app qrcodecreater_qrcode 出力先フォルダ CSVファイル名
 ```

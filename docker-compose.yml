@@ -1,0 +1,10 @@
+version: "3"
+services: 
+  qrcode: # サービス名
+    container_name: creater
+    build: # ビルドに使うDockerファイルのパス
+      context: .
+      dockerfile: ./build/Dockerfile
+    tty: true # コンテナの永続化
+    volumes:
+      - ./cmd:/go/src/app # マウントディレクトリ

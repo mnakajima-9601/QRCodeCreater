@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<List>
+	<Out>output/</Out>
+	<CsvFile>csv/test.csv</CsvFile>
+	<Size>198</Size>
+	<TtfFile>font/VL-PGothic-Regular.ttf</TtfFile>
+</List>

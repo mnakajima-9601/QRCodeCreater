@@ -41,6 +41,8 @@ var information3List []string
 var margin int
 var qrX int
 var qrY int
+var outPut string
+var csvPath string
 
 const (
 	x             = 0
@@ -55,6 +57,10 @@ const (
 )
 
 func main() {
+	println(os.Args[1])
+	println(os.Args[2])
+	outPut = os.Args[1]
+	csvPath = os.Args[2]
 	// ユーザディレクトリ取得
 	p, _ := os.UserHomeDir()
 	dir = p + "/Desktop/"
@@ -77,11 +83,14 @@ func getConf() {
 	}
 	conf.CsvFile = dir + conf.CsvFile
 	conf.Out = dir + conf.Out
-	conf.TtfFile = "font/" + conf.TtfFile
 }
 
 func getCsv() {
-	file, err := os.Open(conf.CsvFile)
+
+	if csvPath == "" {
+		csvPath = conf.CsvFile
+	}
+	file, err := os.Open(csvPath)
 	if err != nil {
 		panic(err)
 	}
@@ -267,6 +276,12 @@ func createImg() {
 		dr7.DrawString(information3List[count])
 
 		// QRコード
+		dr8 := &font.Drawer{
+			Dst:  img,
+			Src:  image.Black,
+			Face: face,
+			Dot:  fixed.Point26_6{},
+		}
 
 		margin = 0
 		qrCode, _ := qr.Encode(codeList[count], qr.M, qr.Auto)
@@ -282,9 +297,15 @@ func createImg() {
 				if rect.Min.X <= x && x < rect.Max.X &&
 					rect.Min.Y <= y && y < rect.Max.Y &&
 					qrCode.At(x, y) == color.Black {
-					img.Set(qrX, qrY, color.RGBA{0, 0, 0, 0})
+					dr8.Dot.X = fixed.I(qrX)
+					dr8.Dot.Y = fixed.I(qrY)
+					dr8.DrawString(".")
+					// img.Set(qrX, qrY, color.RGBA{0, 0, 0, 0})
 				} else {
-					img.Set(qrX, qrY, color.RGBA{255, 255, 255, 255})
+					dr8.Dot.X = fixed.I(qrX)
+					dr8.Dot.Y = fixed.I(qrY)
+					dr8.DrawString("")
+					// img.Set(qrX, qrY, color.RGBA{255, 255, 255, 255})
 				}
 				qrX = qrX + 1
 			}
@@ -302,7 +323,11 @@ func createImg() {
 			os.Exit(1)
 		}
 
-		file, err := os.Create(conf.Out + no + ".png")
+		if outPut == "" {
+			outPut = conf.Out
+		}
+
+		file, err := os.Create(outPut + "/" + no + ".png")
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
