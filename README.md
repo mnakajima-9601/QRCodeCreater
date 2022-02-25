@@ -30,8 +30,12 @@ go run main.go 出力先フォルダ CSVファイルパス
 カレントディレクトリ/csv配下にCSVファイルを置きます
 output配下に画像が出力されます。
 
+ビルド後、docker run　で実行します。
+
+```
+docker run -it --name コンテナ名 --mount type=bind,src=カレントディレクトリ,dst=コンテナディレクトリ  qrcodecreater_qrcode コンテナディレクトリ/アウトプット先ディレクトリ コンテナディレクトリ/CSVファイル名
+```
 ```
 docker-compose build --no-cache
-docker run -it --name コンテナ名 --mount type=bind,src=カレントディレクトリ,dst=コンテナディレクトリ  qrcodecreater_qrcode コンテナディレクトリ/アウトプット先ディレクトリ コンテナディレクトリ/CSVファイル名
 docker run -it --name qrcode_creater --mount type=bind,src=$PWD,dst=/pwd  qrcodecreater_qrcode /pwd/cmd/qrCode/output /pwd/cmd/qrCode/csv/CSVファイル名
 ```
