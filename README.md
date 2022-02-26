@@ -37,5 +37,5 @@ docker run -it --name コンテナ名 --mount type=bind,src=①,dst=コンテナ
 以下ではカレントディレクトリの想定です。
 ```
 docker-compose build --no-cache
-docker run -it --name qrcode_creater --mount type=bind,src=$PWD,dst=/pwd  qrcodecreater_qrcode /pwd/cmd/qrCode/output /pwd/cmd/qrCode/csv/CSVファイル名
+docker run -it --name qrcode_creater --mount type=bind,src=$PWD,dst=/pwd  qrcodecreater_qrcode /pwd/cmd/qrCode /pwd/cmd/qrCode/CSVファイル名
 ```
