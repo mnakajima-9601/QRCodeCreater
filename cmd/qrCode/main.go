@@ -57,10 +57,10 @@ const (
 )
 
 func main() {
-	println(os.Args[1])
-	println(os.Args[2])
-	outPut = os.Args[1]
-	csvPath = os.Args[2]
+	if len(os.Args) > 1 {
+		outPut = os.Args[1]
+		csvPath = os.Args[2]
+	}
 	// ユーザディレクトリ取得
 	p, _ := os.UserHomeDir()
 	dir = p + "/Desktop/"
