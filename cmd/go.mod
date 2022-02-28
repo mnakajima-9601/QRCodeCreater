@@ -8,4 +8,4 @@ require (
 	golang.org/x/image v0.0.0-20211028202545-6944b10bf410
 )
 
-require github.com/google/uuid v1.3.0 // indirect
+require github.com/google/uuid v1.3.0 
