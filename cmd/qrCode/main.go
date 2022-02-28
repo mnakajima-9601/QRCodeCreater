@@ -13,6 +13,7 @@ import (
 
 	"github.com/boombuler/barcode"
 	"github.com/boombuler/barcode/qr"
+	"github.com/google/uuid"
 
 	"github.com/golang/freetype/truetype"
 	"golang.org/x/image/font"
@@ -43,6 +44,9 @@ var qrX int
 var qrY int
 var outPut string
 var csvPath string
+var uuFlg string
+var uu string
+var qrCode string
 
 const (
 	x             = 0
@@ -60,6 +64,9 @@ func main() {
 	if len(os.Args) > 1 {
 		outPut = os.Args[1]
 		csvPath = os.Args[2]
+	}
+	if len(os.Args) == 4 {
+		uuFlg = os.Args[3]
 	}
 	// ユーザディレクトリ取得
 	p, _ := os.UserHomeDir()
@@ -104,7 +111,13 @@ func getCsv() {
 		if err != nil {
 			break
 		}
-		codeList = append(codeList, line[0])
+		if uuFlg == "1" {
+			createUUID()
+			qrCode = line[0] + uu
+		} else {
+			qrCode = line[0]
+		}
+		codeList = append(codeList, qrCode)
 		noList = append(noList, line[1])
 		title1List = append(title1List, line[2])
 		title2List = append(title2List, line[3])
@@ -114,6 +127,15 @@ func getCsv() {
 		information3List = append(information3List, line[7])
 	}
 
+}
+func createUUID() {
+	u, err := uuid.NewRandom()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	uu = u.String()
+	fmt.Println(uu)
 }
 
 func createImg() {

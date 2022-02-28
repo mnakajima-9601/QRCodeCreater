@@ -28,6 +28,11 @@ go run main.go
 go run main.go 出力先フォルダ CSVファイルパス
 ```
 
+UUIDを作成したい場合は以下のようにしてください
+```
+go run main.go 出力先フォルダ CSVファイルパス 1
+```
+
 
 ## dockerでの起動手順
 ビルド後、docker run　で実行します。
@@ -41,4 +46,9 @@ docker run -it --name コンテナ名 --mount type=bind,src=①,dst=コンテナ
 ```
 docker-compose build --no-cache
 docker run -it --name qrcode_creater --mount type=bind,src=$PWD,dst=/pwd  qrcodecreater_qrcode /pwd/cmd/qrCode /pwd/cmd/qrCode/CSVファイル名
+```
+
+UUIDを作成したい場合は以下のようにしてください
+```
+docker run -it --name コンテナ名 --mount type=bind,src=①,dst=コンテナディレクトリ  qrcodecreater_qrcode コンテナディレクトリ/② コンテナディレクトリ/③/CSVファイル名 1
 ```
