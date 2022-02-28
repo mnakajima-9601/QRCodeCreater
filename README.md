@@ -3,6 +3,9 @@ QRコードを作成するプログラムです。
 
 ## ローカルでの起動手順
 conf.xml内でパラメータ設定できます。
+```
+go run main.go
+```
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
