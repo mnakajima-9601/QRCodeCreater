@@ -260,7 +260,7 @@ func createImg() {
 		}
 
 		dr5.Dot.X = (fixed.I(imageWidth) - dr5.MeasureString(information1List[count])) / 2
-		dr5.Dot.Y = fixed.I(420)
+		dr5.Dot.Y = fixed.I(435)
 		dr5.DrawString(information1List[count])
 
 		// 情報２
@@ -273,9 +273,9 @@ func createImg() {
 
 		dr6.Dot.X = (fixed.I(imageWidth) - dr6.MeasureString(information2List[count])) / 2
 		if information1List[count] == "" {
-			dr6.Dot.Y = fixed.I(420)
+			dr6.Dot.Y = fixed.I(435)
 		} else {
-			dr6.Dot.Y = fixed.I(445)
+			dr6.Dot.Y = fixed.I(460)
 		}
 		dr6.DrawString(information2List[count])
 
@@ -289,11 +289,11 @@ func createImg() {
 
 		dr7.Dot.X = (fixed.I(imageWidth) - dr7.MeasureString(information3List[count])) / 2
 		if information1List[count] == "" && information2List[count] == "" {
-			dr7.Dot.Y = fixed.I(420)
+			dr7.Dot.Y = fixed.I(435)
 		} else if information1List[count] == "" || information2List[count] == "" {
-			dr7.Dot.Y = fixed.I(445)
+			dr7.Dot.Y = fixed.I(460)
 		} else {
-			dr7.Dot.Y = fixed.I(470)
+			dr7.Dot.Y = fixed.I(485)
 		}
 		dr7.DrawString(information3List[count])
 
