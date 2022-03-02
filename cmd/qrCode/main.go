@@ -247,9 +247,9 @@ func createImg() {
 			Dot:  fixed.Point26_6{},
 		}
 
-		dr4.Dot.X = (fixed.I(imageWidth) - dr4.MeasureString(no)) / 2
+		dr4.Dot.X = (fixed.I(imageWidth) - dr4.MeasureString("整理番号："+no)) / 2
 		dr4.Dot.Y = fixed.I(395)
-		dr4.DrawString(no)
+		dr4.DrawString("整理番号：" + no)
 
 		// 情報１
 		dr5 := &font.Drawer{
