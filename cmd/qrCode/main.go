@@ -10,6 +10,7 @@ import (
 	"image/png"
 	"io/ioutil"
 	"os"
+	"time"
 
 	"github.com/boombuler/barcode"
 	"github.com/boombuler/barcode/qr"
@@ -47,6 +48,7 @@ var csvPath string
 var uuFlg string
 var uu string
 var qrCode string
+var fileName string
 
 const (
 	x             = 0
@@ -73,6 +75,8 @@ func main() {
 	dir = p + "/Desktop/"
 	//パラメーターをxmlファイルから取得する
 	getConf()
+	// uuid用のファイル名を作成する
+	createFileName()
 	//CSVを読み込む
 	getCsv()
 	// 画像作成
@@ -90,6 +94,17 @@ func getConf() {
 	}
 	conf.CsvFile = dir + conf.CsvFile
 	conf.Out = dir + conf.Out
+}
+
+func createFileName() {
+	if uuFlg == "1" {
+		if outPut == "" {
+			outPut = conf.Out
+		}
+		day := time.Now()
+		const layout = "20000101"
+		fileName = outPut + day.Format(layout) + "_作成UUID一覧.txt"
+	}
 }
 
 func getCsv() {
@@ -114,6 +129,7 @@ func getCsv() {
 		if uuFlg == "1" {
 			createUUID()
 			qrCode = line[0] + uu
+			writeFile()
 		} else {
 			qrCode = line[0]
 		}
@@ -135,7 +151,21 @@ func createUUID() {
 		return
 	}
 	uu = u.String()
-	fmt.Println(uu)
+}
+
+func writeFile() {
+	// ファイルを書き込み用にオープン
+	file, err := os.OpenFile(fileName, os.O_CREATE|os.O_APPEND|os.O_RDWR, 0666)
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+
+	// テキストを書き込む
+	_, err = file.WriteString(uu + "\n")
+	if err != nil {
+		panic(err)
+	}
 }
 
 func createImg() {
