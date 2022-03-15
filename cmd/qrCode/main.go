@@ -102,8 +102,8 @@ func createFileName() {
 			outPut = conf.Out
 		}
 		day := time.Now()
-		const layout = "20000101"
-		fileName = outPut + day.Format(layout) + "_作成UUID一覧.txt"
+		var layout = "20060102"
+		fileName = outPut + "_" + day.Format(layout) + "_作成UUID一覧.txt"
 	}
 }
 
